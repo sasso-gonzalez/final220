@@ -1,0 +1,46 @@
+/* palette:
+lightblue: #ddeff3
+darkblue: #224356
+grey: #8da6ad
+grey-blue: #b9cfd6 */
+
+
+*{
+    box-sizing: border-box;
+}
+html, body{
+    margin: 0;
+    padding: 0;
+    background-color: #ddeff3;
+    font-family: figtree;
+    color: #8da6ad;
+}
+
+body{
+    /* height: 100vh; */
+    width: 100vw;
+}
+.navbar{
+    background-color: #0d2a4a;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    padding: 20px;
+    text-align: right;
+}
+.navbar_items a{
+    width: fit-content;
+    text-decoration: none;
+}
+.word{
+    padding-left: 5vw;
+}
+.word:hover{
+    /* padding-left: 5vw; */
+    background-color: #6f8085;
+}
+
+#fields{
+    display: none;
+}
+

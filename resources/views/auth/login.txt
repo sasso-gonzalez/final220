@@ -1,0 +1,56 @@
+<!-- <x-guest-layout> -->
+    <!-- Session Status -->
+    <link rel="stylesheet" href="{{ asset('CSS/loginform.css') }}">
+
+    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class="navbar">
+            @if (Route::has('login'))
+                <div class="navbar_items">
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="word">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="word">Log in</a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="word">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+        </div>
+<br><br><br><br><br><br>
+    <div class="overlay">
+        <form method="POST" action="{{ route('login') }}">
+        @csrf
+
+            <div class="con">
+                <header class="head-form">
+                    <h2>Log In</h2>
+                    <p>login here using your username and password</p>
+                </header>
+                <br>
+                <div class="field-set">
+
+                    <input id="email" class="form-input" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                    
+                    <br>
+                    
+                    <input id="password" class="form-input" type="password"
+                        name="password"
+                        required autocomplete="current-password" />
+
+                    <br>
+                        <x-input-error :messages="$errors->get('password')" class="form-input" />
+
+                        <button class="log-in">
+                            {{ __('Log in') }}
+                        </button>
+                </div>
+                <div class="other">
+                    <button class="btn submits sign-up" href="{{ route('register') }}">
+                        {{ __('Sign Up') }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>  
+<!-- </x-guest-layout> -->
