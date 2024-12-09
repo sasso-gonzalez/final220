@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Patient;
 use App\Models\PatientSchedule;
 use App\Models\Shift;
+use Carbon\Carbon;
 
 
 
@@ -19,16 +20,18 @@ class CaregiverHomeController extends Controller
         $this->middleware('auth');
     }
 
-
     public function showCaregiverHome($id)
     {
         $caregiverEmpId = Auth::user()->employee->emp_id;
-    
-        $caregroup = Shift::where('emp_ID', $caregiverEmpId)->value('caregroup');
-    
-        $patients = Patient::where('caregroup', $caregroup)->get();
-    
-        // $patientSchedules = PatientSchedule::whereIn('patient_id', $patients->pluck('patient_id'))->get();
+        $shiftDate = Carbon::now()->format('Y-m-d'); // getting today's date
+        $caregroup = Shift::where('emp_ID', $caregiverEmpId)
+                          ->whereDate('shift_date', $shiftDate) // ensuring its getting the caregroup assigned for today
+                          ->value('caregroup');
+        
+        $patients = Patient::where('caregroup', $caregroup)
+                           ->with(['patientSchedules' => function($query) use ($shiftDate) {
+                               $query->whereDate('particular_date', $shiftDate);
+                           }])->get();
     
         return view('caregiverHome', compact('patients'));
     }
@@ -43,7 +46,6 @@ class CaregiverHomeController extends Controller
         $schedule = PatientSchedule::where('caregiver_id', $caregiverId)
             ->where('patient_id', $patientId)
             ->where('particular_date', $shiftDate)
-            // ->where('caregroup', $caregroup)
             ->first();
     
         if (!$schedule) {
@@ -51,7 +53,6 @@ class CaregiverHomeController extends Controller
                 'caregiver_id' => $caregiverId,
                 'patient_id' => $patientId,
                 'particular_date' => $shiftDate,
-                // 'caregroup' => $caregroup, //no caregroup in the schedule..?
                 'm_med' => false,
                 'a_med' => false,
                 'n_med' => false,
@@ -97,8 +98,5 @@ class CaregiverHomeController extends Controller
     
         return redirect()->route('caregiverHome', ['id' => auth()->user()->id])->with('success', 'Schedule updated successfully!');
     }
-    
-
-    
 }
 

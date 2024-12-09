@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\Patient;
+use App\Models\Appointment;
 use App\Models\PatientSchedule;
 use Illuminate\Http\Request;
 
@@ -28,6 +29,16 @@ class AdminReportController extends Controller
         }
 
         $missedActivities = $query->get();
+
+        foreach ($missedActivities as $activity) {
+            $latestAppointment = $activity->patient->appointments()->orderBy('app_date', 'desc')->first();
+            $doctorUser = $latestAppointment ? $latestAppointment->employee->user : null;
+            $prescriptionsGiven = $latestAppointment && $latestAppointment->prescriptions->isNotEmpty();
+            $activity->doctorUser = $doctorUser;
+            $activity->latestAppointment = $latestAppointment;
+            $activity->prescriptionsGiven = $prescriptionsGiven;
+            $activity->attended = $prescriptionsGiven;
+        }
 
         return view('adminReport', compact('missedActivities', 'date'));
     }

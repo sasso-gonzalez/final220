@@ -36,15 +36,12 @@
         <h2>Patient Information</h2>
         <p>Name: {{ $patientInfo->first_name }} {{ $patientInfo->last_name }}</p>
         <p>Caregroup: {{ $patientInfo->caregroup }}</p>
-        <!-- <p>Admission Date: {{ $patientInfo->admission_date }}</p> -->
-        <!-- <p>Amount Due: {{ $patientInfo->amount_due }}</p> -->
 
         @if ($schedule && $schedule->isNotEmpty())
             <h2>Patient Schedule for {{ $date }}</h2>
             <table class="table">
                 <thead>
                     <tr>
-                        <!-- <th>Date</th> -->
                         <th>Morning Medicine</th>
                         <th>Afternoon Medicine</th>
                         <th>Night Medicine</th>
@@ -52,12 +49,15 @@
                         <th>Lunch</th>
                         <th>Dinner</th>
                         <th>Caregiver</th>
+                        <th>Doctor</th>
+                        <th>Appointment Status</th>
+                        <th>Prescription Status</th>
+                        <th>Attended</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($schedule as $item)
                         <tr>
-                            <!-- <td>{{ $item->particular_date }}</td> -->
                             <td><input type="checkbox" {{ $item->m_med ? 'checked' : '' }} disabled></td>
                             <td><input type="checkbox" {{ $item->a_med ? 'checked' : '' }} disabled></td>
                             <td><input type="checkbox" {{ $item->n_med ? 'checked' : '' }} disabled></td>
@@ -65,6 +65,12 @@
                             <td><input type="checkbox" {{ $item->lunch ? 'checked' : '' }} disabled></td>
                             <td><input type="checkbox" {{ $item->dinner ? 'checked' : '' }} disabled></td>
                             <td>{{ $item->caregiver_first_name }} {{ $item->caregiver_last_name }}</td>
+                            @if ($loop->first)
+                                <td rowspan="{{ $schedule->count() }}">{{ $doctorUser ? $doctorUser->first_name . ' ' . $doctorUser->last_name : 'N/A' }}</td>
+                                <td rowspan="{{ $schedule->count() }}">{{ $latestAppointment ? 'Scheduled' : 'Not Scheduled' }}</td>
+                                <td rowspan="{{ $schedule->count() }}">{{ $prescriptionsGiven ? 'Given' : 'Not Given' }}</td>
+                                <td rowspan="{{ $schedule->count() }}"><input type="checkbox" {{ $attended ? 'checked' : '' }} disabled></td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>                

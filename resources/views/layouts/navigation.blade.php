@@ -43,7 +43,7 @@
 
                     <!-- Caregiver Links (access_level 4) -->
                     @if($access == 4)
-                        <li><a href="{{ route('caregiverHome', ['id' => $user->id]) }}">Caregiver Home</a></li>
+                        <li><a href="{{ route('caregiverHome', ['id' => $user->id]) }}">Caregiver Home</a></li> <!--  -->
                         <li><a href="{{ route('shifts.index') }}">Roster</a></li>
                     @endif
 

@@ -20,7 +20,7 @@
             <table class="table table-bordered mt-3">
                 <thead>
                     <tr>
-                        <th>Patient Name</th>
+                        <th>Patient Name (ID)</th>
                         <th>Caregiver Name</th>
                         <th>Date</th>
                         <th>Morning Medicine</th>
@@ -29,13 +29,16 @@
                         <th>Breakfast</th>
                         <th>Lunch</th>
                         <th>Dinner</th>
+                        <th>Doctor</th>
+                        <th>Appointment Status</th>
+                        <th>Prescription Status</th>
+                        <th>Attended</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($missedActivities as $activity)
                         <tr>
                             <td>{{ $activity->patient->user->first_name }} {{ $activity->patient->user->last_name }} ({{ $activity->patient_id }})</td>
-                            <td></td>
                             <td>{{ $activity->employee->user->first_name }} {{ $activity->employee->user->last_name }} ({{ $activity->caregiver_id }})</td>
                             <td>{{ $activity->particular_date }}</td>
                             <td>{{ $activity->m_med ? 'Yes' : 'No' }}</td>
@@ -44,6 +47,10 @@
                             <td>{{ $activity->breakfast ? 'Yes' : 'No' }}</td>
                             <td>{{ $activity->lunch ? 'Yes' : 'No' }}</td>
                             <td>{{ $activity->dinner ? 'Yes' : 'No' }}</td>
+                            <td>{{ $activity->doctorUser ? $activity->doctorUser->first_name . ' ' . $activity->doctorUser->last_name : 'N/A' }}</td>
+                            <td>{{ $activity->latestAppointment ? 'Scheduled' : 'Not Scheduled' }}</td>
+                            <td>{{ $activity->prescriptionsGiven ? 'Given' : 'Not Given' }}</td>
+                            <td><input type="checkbox" {{ $activity->attended ? 'checked' : '' }} disabled></td>
                         </tr>
                     @endforeach
                 </tbody>

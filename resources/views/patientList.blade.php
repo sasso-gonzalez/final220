@@ -44,7 +44,7 @@
                     <th>Name</th>
                     <th>Age</th>
                     <th>Emergency Contact</th>
-                    <th>Emergency Contact Name</th>
+                    <th>Emergency Contact Relation</th>
                     <th>Admission Date</th>
                     <th>Additional Info</th>
                 </tr>
