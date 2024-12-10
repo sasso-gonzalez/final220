@@ -11,9 +11,9 @@ grey-blue: #b9cfd6 */
 html, body{
     margin: 0;
     padding: 0;
-    background-color: #ddeff3;
+    background-color: #dafaff;
     font-family: figtree;
-    color: #8da6ad;
+    color: white;
 }
 
 body{

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @include('layouts.navigation')
-<br><br><br><br><br><br>
+<link href="{{ asset('css/customerHomes.css') }}" rel="stylesheet">
+<br><br><br>
 @php
     $firstName = $user->first_name;
     $lastName = $user->last_name;
@@ -24,39 +25,44 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($patient->patientSchedules as $schedule)
+        @if($patient->patientSchedules->isEmpty())
             <tr>
-                <td>Morning</td>
-                <td><input type="checkbox" name="m_med[]" value="{{ $schedule->id }}" {{ $schedule->m_med ? 'checked' : '' }} disabled></td>
-                <td><input type="checkbox" name="breakfast[]" value="{{ $schedule->id }}" {{ $schedule->breakfast ? 'checked' : '' }} disabled></td>
-                @if ($loop->first)
-                    <td rowspan="{{ $patient->patientSchedules->count() }}">
-                        {{ $doctorUser ? $doctorUser->first_name . ' ' . $doctorUser->last_name : 'N/A' }}
-                    </td>
-                    <td rowspan="{{ $patient->patientSchedules->count() }}">
-                        {{ $latestAppointment ? 'Scheduled' : 'Not Scheduled' }}
-                    </td>
-                    <td rowspan="{{ $patient->patientSchedules->count() }}">
-                        {{ $latestAppointment && $latestAppointment->prescriptions->isNotEmpty() ? 'Given' : 'Not Given' }}
-                    </td>
-                    <td rowspan="{{ $patient->patientSchedules->count() }}">
-                        <input type="checkbox" name="attended" value="1" {{ $attended ? 'checked' : '' }} disabled>
-                    </td>
-                @endif
+                <td colspan="7">No schedule available for today. Please try again later.</td>
             </tr>
-            <tr>
-                <td>Afternoon</td>
-                <td><input type="checkbox" name="a_med[]" value="{{ $schedule->id }}" {{ $schedule->a_med ? 'checked' : '' }} disabled></td>
-                <td><input type="checkbox" name="lunch[]" value="{{ $schedule->id }}" {{ $schedule->lunch ? 'checked' : '' }} disabled></td>
-            </tr>
-            <tr>
-                <td>Night</td>
-                <td><input type="checkbox" name="n_med[]" value="{{ $schedule->id }}" {{ $schedule->n_med ? 'checked' : '' }} disabled></td>
-                <td><input type="checkbox" name="dinner[]" value="{{ $schedule->id }}" {{ $schedule->dinner ? 'checked' : '' }} disabled></td>
-            </tr>
-        @endforeach
+        @else
+            @foreach($patient->patientSchedules as $schedule)
+                <tr>
+                    <td>Morning</td>
+                    <td><input type="checkbox" name="m_med[]" value="{{ $schedule->id }}" {{ $schedule->m_med ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" name="breakfast[]" value="{{ $schedule->id }}" {{ $schedule->breakfast ? 'checked' : '' }} disabled></td>
+                    @if ($loop->first)
+                        <td rowspan="{{ $patient->patientSchedules->count() }}">
+                            {{ $doctorUser ? $doctorUser->first_name . ' ' . $doctorUser->last_name : 'N/A' }}
+                        </td>
+                        <td rowspan="{{ $patient->patientSchedules->count() }}">
+                            {{ $latestAppointment ? 'Scheduled' : 'Not Scheduled' }}
+                        </td>
+                        <td rowspan="{{ $patient->patientSchedules->count() }}">
+                            {{ $latestAppointment && $latestAppointment->prescriptions->isNotEmpty() ? 'Given' : 'Not Given' }}
+                        </td>
+                        <td rowspan="{{ $patient->patientSchedules->count() }}">
+                            <input type="checkbox" name="attended" value="1" {{ $attended ? 'checked' : '' }} disabled>
+                        </td>
+                    @endif
+                </tr>
+                <tr>
+                    <td>Afternoon</td>
+                    <td><input type="checkbox" name="a_med[]" value="{{ $schedule->id }}" {{ $schedule->a_med ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" name="lunch[]" value="{{ $schedule->id }}" {{ $schedule->lunch ? 'checked' : '' }} disabled></td>
+                </tr>
+                <tr>
+                    <td>Night</td>
+                    <td><input type="checkbox" name="n_med[]" value="{{ $schedule->id }}" {{ $schedule->n_med ? 'checked' : '' }} disabled></td>
+                    <td><input type="checkbox" name="dinner[]" value="{{ $schedule->id }}" {{ $schedule->dinner ? 'checked' : '' }} disabled></td>
+                </tr>
+            @endforeach
+        @endif
         </tbody>
     </table>
 </div>
 @endsection
-

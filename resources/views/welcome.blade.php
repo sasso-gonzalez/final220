@@ -1,43 +1,141 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="{{ asset('CSS/navbar.css') }}">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7fafc;
+        }
 
-        <title>Silver Cross Medical Center</title>
+        .navbar {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        form {
+            max-width: 450px;
+            width: 100%;
+            margin-top: 100px;
+            padding: 30px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('CSS/app.css') }}">
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
 
+        label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
 
-    </head>
-    <body>
-        <div class="navbar">
-            @if (Route::has('login'))
-                <div class="navbar_items">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="word">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="word">Log in</a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="word">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-        </div>
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
 
-        <!-- <div class="">
-            <div class="">
-                <div class="mainlogo">
-                    <img src="{{ asset('images/medical_logo.png') }}" alt="Medical Logo">
-                </div>
-            </div>
-        </div> -->
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
 
-    </body>
+        .input-error {
+            font-size: 12px;
+            color: red;
+            margin-top: 5px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0f283a;
+        }
+
+        a {
+            text-align: center;
+            display: block;
+            color: #007bff;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .navbar_items {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            nav ul li {
+                margin-bottom: 15px;
+            }
+
+            form {
+                width: 90%;
+                padding: 20px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    @extends('layouts.app')
+    @include('layouts.navigation')
+    <br><br><br>
+</body>
 </html>

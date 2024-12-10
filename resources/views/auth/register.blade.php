@@ -1,123 +1,255 @@
-<link rel="stylesheet" href="{{ asset('CSS/app.css') }}">
-<x-guest-layout>
-<div class="navbar">
-            @if (Route::has('login'))
-                <div class="navbar_items">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="word">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="word">Log in</a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="word">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-        </div>
-<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <link rel="stylesheet" href="{{ asset('CSS/navbar.css') }}">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7fafc;
+        }
+
+        .navbar {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        form {
+            max-width: 450px;
+            width: 100%;
+            margin-top: 100px;
+            padding: 40px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-left: 20px; 
+            margin-right: 20px; 
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"],
+        select {
+            width: calc(100% - 40px);
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            margin-left: 20px; 
+            margin-right: 20px; 
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="date"]:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .input-error {
+            font-size: 12px;
+            color: red;
+            margin-top: 5px;
+            margin-left: 20px; /* Align with inputs */
+            margin-right: 20px; /* Align with inputs */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 60px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0f283a;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            color: #007bff;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            padding: 10px 20px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .navbar_items {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            nav ul li {
+                margin-bottom: 15px;
+            }
+
+            form {
+                width: 90%;
+                padding: 20px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    @extends('layouts.app')
+    @include('layouts.navigation')
 
     <form method="POST" action="{{ route('register') }}">
         @csrf
-        
-        <!-- First Name -->
+        <h1>Register</h1>
+
         <div>
-            <x-input-label for="first_name" :value="__('First Name')" />
-            <x-text-input id="first_name" class="" type="text" name="first_name" :value="old('first_name')" required autofocus />
-            <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
+            <label for="first_name">First Name</label>
+            <input id="first_name" type="text" name="first_name" value="{{ old('first_name') }}" required autofocus>
+            @error('first_name')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
         </div>
 
-        <!-- Last Name -->
         <div>
-            <x-input-label for="last_name" :value="__('Last Name')" />
-            <x-text-input id="last_name" class="" type="text" name="last_name" :value="old('last_name')" required />
-            <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
+            <label for="last_name">Last Name</label>
+            <input id="last_name" type="text" name="last_name" value="{{ old('last_name') }}" required>
+            @error('last_name')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
         </div>
 
-        <!-- Role -->
-        <div class="form-group">
+        <div>
             <label for="role">Role</label>
-            <select name="role" id="role" class="form-control" onchange='patientFields()' required>
+            <select name="role" id="role" required>
                 <option value="" disabled selected>Select a role</option>
                 @foreach($roles as $role)
-                    @if ( $role->role !== 'admin') <!-- making sure you can't just register another admin -serena -->
-                    <option value="{{ $role->role }}">{{ $role->role }}</option> 
+                    @if ($role->role !== 'admin')
+                        <option value="{{ $role->role }}">{{ $role->role }}</option>
                     @endif
                 @endforeach
             </select>
         </div>
 
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="" type="email" name="email" :value="old('email')" required />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" value="{{ old('email') }}" required>
+            @error('email')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
         </div>
 
-        <!-- Phone -->
-        <div class="mt-4">
-            <x-input-label for="phone" :value="__('Phone')" />
-            <x-text-input id="phone" class="" type="text" name="phone" :value="old('phone')" />
-            <x-input-error :messages="$errors->get('phone')" class="mt-2" />
+        <div>
+            <label for="phone">Phone</label>
+            <input id="phone" type="text" name="phone" value="{{ old('phone') }}">
+            @error('phone')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
         </div>
 
-        <!-- Date of Birth -->
-        <div class="mt-4">
-            <x-input-label for="date_of_birth" :value="__('Date of Birth')" />
-            <x-text-input id="date_of_birth" class="" type="date" name="date_of_birth" :value="old('date_of_birth')" />
-            <x-input-error :messages="$errors->get('date_of_birth')" class="mt-2" />
+        <div>
+            <label for="date_of_birth">Date of Birth</label>
+            <input id="date_of_birth" type="date" name="date_of_birth" value="{{ old('date_of_birth') }}">
+            @error('date_of_birth')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="" type="password" name="password" required />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div>
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" required>
+            @error('password')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-            <x-text-input id="password_confirmation" class="" type="password" name="password_confirmation" required />
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <div>
+            <label for="password_confirmation">Confirm Password</label>
+            <input id="password_confirmation" type="password" name="password_confirmation" required>
+            @error('password_confirmation')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
         </div>
 
         <div id="fields" class="fields">
-            <x-input-label for="family_code" :value="__('family_code')" />
-            <x-text-input id="family_code" type="text" name="family_code" />
-            <x-input-error :messages="$errors->get('family_code')" class="mt-2" />
-       
-            <x-input-label for="emergency_contact" :value="__('emergency_contact')" />
-            <x-text-input id="emergency_contact" type="text" name="emergency_contact"  />
-            <x-input-error :messages="$errors->get('emergency_contact')" class="mt-2" />
-        
-            <x-input-label for="relation_emergency_contact" :value="__('relation_emergency_contact')" />
-            <x-text-input id="relation_emergency_contact" type="text" name="relation_emergency_contact" />
-            <x-input-error :messages="$errors->get('relation_emergency_contact')" class="mt-2" />
+            <label for="family_code">Family Code</label>
+            <input id="family_code" type="text" name="family_code">
+            @error('family_code')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
+
+            <label for="emergency_contact">Emergency Contact</label>
+            <input id="emergency_contact" type="text" name="emergency_contact">
+            @error('emergency_contact')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
+
+            <label for="relation_emergency_contact">Relation to Emergency Contact</label>
+            <input id="relation_emergency_contact" type="text" name="relation_emergency_contact">
+            @error('relation_emergency_contact')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
         </div>
-        <div class="">
-            <a class="" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-            <x-primary-button class="" type="submit">
-                {{ __('Register') }}
-            </x-primary-button>
+
+        <div class="button-container">
+            <button type="submit">Register</button>
+        </div>
+        <div class="button-container">
+            <a href="{{ route('login') }}">Already registered?</a>
         </div>
     </form>
-    <script>
-        function patientFields(){
-            var role = document.getElementById('role').value
-            var newFields = document.getElementById('fields')
-            if(role === 'Patient'){
-                newFields.style.display = 'block'
-            }   
-            else{
-                newFields.style.display = 'none'
-            }
-        }
-
-        function access(){
-            var role = document.getElementById('role').value
-        }
-    </script>
-</x-guest-layout>
+</body>
+</html>

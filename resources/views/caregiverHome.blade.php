@@ -25,8 +25,7 @@
 @extends('layouts.app')
 @include('layouts.navigation')
 <link rel="stylesheet" href="{{ asset('CSS/employeesHomes.css') }}">
-<br><br><br><br><br><br><br><br>
-
+<br>
 @section('content')
     <div class="container caregiver-dashboard">
         <h1>Caregiver Home</h1>

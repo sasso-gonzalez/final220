@@ -17,7 +17,7 @@
 
     Route::get('/', function () {
         return view('welcome');
-    });
+    })->name('welcome');
 
     Route::get('/unauthorized', function () {
         return view('unauthorized');
@@ -138,5 +138,14 @@
     Route::get('/roster', [ShiftController::class, 'roster'])->name('roster');
 
     Route::get('/shifts', [ShiftController::class, 'index'])->name('shifts.index');
+
+    Route::get('/contact', function () {
+        return view('contact');
+    })->name('contact');
+    
+    Route::get('/privacy', function () {
+        return view('privacy');
+    })->name('privacy');
+    
 
     require __DIR__.'/auth.php';

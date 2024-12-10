@@ -1,64 +1,170 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-    <div class="navbar">
-            @if (Route::has('login'))
-                <div class="navbar_items">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="word">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="word">Log in</a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="word">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-        </div>
-<br><br><br><br><br><br>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ asset('CSS/navbar.css') }}">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7fafc;
+        }
+
+        .navbar {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        form {
+            max-width: 450px;
+            width: 100%;
+            margin-top: 100px;
+            padding: 30px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .input-error {
+            font-size: 12px;
+            color: red;
+            margin-top: 5px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0f283a;
+        }
+
+        a {
+            text-align: center;
+            display: block;
+            color: #007bff;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .navbar_items {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            nav ul li {
+                margin-bottom: 15px;
+            }
+
+            form {
+                width: 90%;
+                padding: 20px;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    @extends('layouts.app')
+    @include('layouts.navigation')
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        <h1>Login</h1>
+
         <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div style="margin-left:20px; margin-right:20px;">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username">
+            @error('email')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-<!-- 
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600"> __('Remember me') </span>
-            </label>
+        <div style="margin-left:20px; margin-right:20px;">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" required autocomplete="current-password">
+            @error('password')
+                <span class="input-error">{{ $message }}</span>
+            @enderror
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                     __('Forgot your password?')
-                </a>
-            endif -->
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-            <a class="" href="{{ route('register') }}">
-                {{ __('Not registered? Click here.') }}
-            </a>
+        <div class="button-container">
+            <button type="submit">Log in</button>
         </div>
+
+        <a href="{{ route('register') }}">Not registered? Click here.</a>
     </form>
-    
-</x-guest-layout>
+</body>
+</html>

@@ -16,7 +16,6 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
-            
             <!-- include('layouts navigation ignore this i did this on purpose -serena-->
 
             <!-- Page Heading -->
@@ -29,8 +28,6 @@
             @endif
             <!-- Page Content -->
             <main>
-                
-           <!-- 'content needs called here' -->
             <br><br><br><br>
             <div class="container">
                 @yield('content')
@@ -42,4 +39,6 @@
             </main>
         </div>
     </body>
+    <br>
+    @include('layouts.footer')
 </html>

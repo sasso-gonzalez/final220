@@ -98,7 +98,7 @@ form label {
 </style>
 @extends('layouts.app')
 @include('layouts.navigation')
-<br><br><br><br><br><br><br>
+<br><br><br>
 @section('content')
 <div class="container additional-info">
     <h1>Additional Information of Patient</h1>

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @include('layouts.navigation')
-<br><br><br><br><b><br><br><br><br>
-
+<br><br><br>
 @section('content')
     <div class="container">
         <h1>Patient Schedule</h1>

@@ -1,7 +1,104 @@
+<style>
+    /* public/css/adminPayment.css */
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    background-color: #fff;
+}
+
+form input[readonly] {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+form button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+form button:hover {
+    opacity: 0.9;
+}
+
+form button[type="submit"] {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+form button[type="button"]:not([onclick*="updateCharges"]) {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+form button[onclick*="updateCharges"] {
+    background-color: #ffa500; /* Orange */
+    color: white;
+}
+
+form button:disabled {
+    background-color: #ddd;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+    form input[type="text"],
+    form input[type="number"] {
+        font-size: 12px;
+    }
+
+    form button {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+}
+
+</style>
 @extends('layouts.app')
 @include('layouts.navigation')
 
-<br><br><br><br><br><br>
+<br><br><br>
 @section('content')
 <div class="container">
     <h1>Admin Payment Page</h1>

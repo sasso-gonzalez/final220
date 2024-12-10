@@ -1,10 +1,146 @@
+<style>
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 26px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="date"] {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+table thead {
+    background-color: #0056b3;
+    color: white;
+}
+
+table th,
+table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 14px;
+}
+
+table th {
+    font-weight: bold;
+}
+table tbody{
+    color: black;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+table tbody tr:hover {
+    background-color: lightgrey;
+}
+
+
+p {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+    margin-top: 20px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-group {
+        width: 100%;
+    }
+
+    table th,
+    table td {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+</style>
 @extends('layouts.app')
 @include('layouts.navigation')
-<br><br><br><br><br><br><br><br><br>
+<br><br><br>
 
 @section('content')
     <div class="container">
-        <h1>Admin Report</h1>
+        <h1>Daily Report</h1>
 
         <form method="GET" action="{{ route('admin.report') }}">
             <div class="form-group">
