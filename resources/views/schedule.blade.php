@@ -2,6 +2,8 @@
 @include('layouts.navigation')
 <br><br><br>
 @section('content')
+<link rel="stylesheet" href="{{ asset('CSS/employeesHomes.css') }}">
+<br><br><br>
     <div class="container">
         <h1>Patient Schedule</h1>
 
@@ -37,8 +39,7 @@
                         </tr>
                     </tbody>
                 </table>
-
-                <!-- Submit Button -->
+                <br>
                 <div class="mt-3">
                     <button type="submit" class="btn btn-primary">Save Schedule</button>
                 </div>

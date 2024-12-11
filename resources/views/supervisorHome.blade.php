@@ -1,8 +1,16 @@
 <style>
+.container1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
 .container.supervisor-dashboard {
     border-left: 5px solid #5cb85c;
     background-color: #f4fbf4;
     padding: 25px;
+    width:100%;
 }
 
 .container.supervisor-dashboard h1 {
@@ -32,8 +40,10 @@
 <br><br><br>
 
 @section('content')
+<div class="container1">
     <div class="container supervisor-dashboard">
         <h1>Welcome, Supervisor!</h1>
         <p>This is the Supervisor Dashboard.</p>
     </div>
+</div>
 @endsection

@@ -1,7 +1,5 @@
 <style>
-    /* public/css/create_shift.css */
 
-/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f7fafc;
@@ -25,7 +23,6 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* Form Styles */
 form {
     display: flex;
     flex-direction: column;
@@ -49,7 +46,6 @@ select:focus {
     outline: none;
 }
 
-/* Caregroup Styles */
 #caregroup-div {
     margin-bottom: 20px;
     display: none;
@@ -68,7 +64,6 @@ select option {
     font-size: 14px;
 }
 
-/* Button Styles */
 button[type="submit"] {
     background-color: #007bff;
     color: white;
@@ -84,7 +79,6 @@ button[type="submit"]:hover {
     background-color: #0056b3;
 }
 
-/* Error Message Styles */
 .alert {
     background-color: #f8d7da;
     color: #721c24;
@@ -102,7 +96,6 @@ button[type="submit"]:hover {
     margin-bottom: 5px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         padding: 20px;
@@ -131,17 +124,18 @@ button[type="submit"]:hover {
 <br><br><br>
 
 @section('content')
+<br><br><br>
 <div class="container">
     <h1>Create Shift</h1>
-    <form action="{{ route('shifts.store') }}" method="POST">
+    <form id="shift-form" action="{{ route('shifts.store') }}" method="POST">
         @csrf
-        <input type="date" name="shift_date" required>
+        <input type="date" name="shift_date" id="shift_date" required>
         <input type="datetime-local" name="shift_start" required>
         <input type="datetime-local" name="shift_end" required>
         <div id="caregroup-div">
             <label for="caregroup">Care Group:</label>
             <select name="caregroup" id="caregroup" required>
-                @foreach ($availableCaregroups as $caregroup)
+                @foreach ($allCaregroups as $caregroup)
                     <option value="{{ $caregroup }}">{{ $caregroup }}</option>
                 @endforeach
             </select>
@@ -161,6 +155,28 @@ button[type="submit"]:hover {
 </div>
 
 <script>
+    document.getElementById('shift_date').addEventListener('change', function() {
+        const date = this.value;
+        fetchAvailableEmployees(date);
+    });
+
+    function fetchAvailableEmployees(date) {
+        fetch(`/shifts/available-employees?date=${date}`)
+            .then(response => response.json())
+            .then(data => {
+                const empSelect = document.getElementById('emp_id');
+                empSelect.innerHTML = '<option value="">Select Employee</option>';
+                data.employees.forEach(employee => {
+                    const option = document.createElement('option');
+                    option.value = employee.emp_id;
+                    option.textContent = `${employee.user.first_name} ${employee.user.last_name}`;
+                    option.setAttribute('data-role', employee.user.role);
+                    empSelect.appendChild(option);
+                });
+                updateRole();
+            });
+    }
+
     function updateRole() {
         const selectedOption = document.querySelector('#emp_id option:checked');
         const role = selectedOption.getAttribute('data-role');
@@ -168,15 +184,15 @@ button[type="submit"]:hover {
 
         // Show or hide caregiver group dropdown based on role
         const caregroupDiv = document.getElementById('caregroup-div');
-        const caregroupInput = document.getElementById('caregroup'); // Assuming this is the input for the caregiver group
+        const caregroupInput = document.getElementById('caregroup');
 
         if (role === 'Caregiver') {
             caregroupDiv.style.display = 'block';
-            caregroupInput.required = true; // Make caregroup input required for caregivers
+            caregroupInput.setAttribute('required', 'required');
         } else {
             caregroupDiv.style.display = 'none';
-            caregroupInput.value = ''; // Clear the caregiver group value
-            caregroupInput.required = false; // Remove required attribute for non-caregivers
+            caregroupInput.value = '';
+            caregroupInput.removeAttribute('required');
         }
     }
 

@@ -34,7 +34,7 @@
     }
 
     .search-container {
-        max-width: 600px;
+        max-width: 900px;
         margin: 0 auto 30px;
         background: #fff;
         padding: 20px;
@@ -169,11 +169,14 @@
 @extends('layouts.app')
 @include('layouts.navigation')
 <br><br><br>
+
 @section('content')
+<br><br><br>
 <div class="container">
     <h1>Welcome, Doctor!</h1>
-    <h2>Search Appointments</h2>
     <div class="search-container">
+    <h2>Search Appointments</h2>
+    <br>
         <form method="GET" action="{{ route('doctorHome') }}">
             <div class="form-row">
                 <div>

@@ -1,157 +1,147 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Page</title>
-    <link rel="stylesheet" href="{{ asset('CSS/navbar.css') }}">
-    <style>
-        body {
-            display: flex;
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    form {
+        max-width: 450px;
+        width: 100%;
+        padding: 40px;
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    label {
+        margin-left: 20px; 
+        margin-right: 20px; 
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    select {
+        width: calc(100% - 40px);
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        margin-left: 20px; 
+        margin-right: 20px; 
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    input[type="date"]:focus,
+    select:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    .input-error {
+        font-size: 12px;
+        color: red;
+        margin-top: 5px;
+        margin-left: 20px; /* Align with inputs */
+        margin-right: 20px; /* Align with inputs */
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    button {
+        background-color: #0056b3;
+        color: white;
+        padding: 10px 60px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0f283a;
+    }
+
+    a {
+        display: block;
+        text-align: center;
+        color: #007bff;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-decoration: none;
+        padding: 10px 20px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .navbar_items {
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #f7fafc;
+            align-items: flex-start;
+            padding: 15px;
         }
 
-        .navbar {
-            width: 100%;
-            position: fixed;
-            top: 0;
-            z-index: 1000;
+        nav ul {
+            flex-direction: column;
+            margin-top: 10px;
+        }
+
+        nav ul li {
+            margin-bottom: 15px;
         }
 
         form {
-            max-width: 450px;
-            width: 100%;
-            margin-top: 100px;
-            padding: 40px;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        label {
-            margin-left: 20px; 
-            margin-right: 20px; 
-            font-size: 14px;
-            color: #333;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        input[type="date"],
-        select {
-            width: calc(100% - 40px);
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            margin-left: 20px; 
-            margin-right: 20px; 
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="password"]:focus,
-        input[type="date"]:focus,
-        select:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        .input-error {
-            font-size: 12px;
-            color: red;
-            margin-top: 5px;
-            margin-left: 20px; /* Align with inputs */
-            margin-right: 20px; /* Align with inputs */
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
+            width: 90%;
+            padding: 20px;
         }
 
         button {
-            background-color: #0056b3;
-            color: white;
-            padding: 10px 60px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
+            font-size: 14px;
+            padding: 8px 15px;
         }
+    }
+</style>
+@extends('layouts.app')
+@include('layouts.navigation')
+<br><br><br>
 
-        button:hover {
-            background-color: #0f283a;
-        }
-
-        a {
-            display: block;
-            text-align: center;
-            color: #007bff;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            text-decoration: none;
-            padding: 10px 20px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .navbar_items {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 15px;
-            }
-
-            nav ul {
-                flex-direction: column;
-                margin-top: 10px;
-            }
-
-            nav ul li {
-                margin-bottom: 15px;
-            }
-
-            form {
-                width: 90%;
-                padding: 20px;
-            }
-
-            button {
-                font-size: 14px;
-                padding: 8px 15px;
-            }
-        }
-    </style>
-</head>
-<body>
-    @extends('layouts.app')
-    @include('layouts.navigation')
-
+@section('content')
+<br><br><br>
+<div class="container">
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <h1>Register</h1>
@@ -251,5 +241,22 @@
             <a href="{{ route('login') }}">Already registered?</a>
         </div>
     </form>
-</body>
-</html>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var roleSelect = document.getElementById('role');
+        roleSelect.addEventListener('change', patientFields);
+    });
+
+    function patientFields() {
+        var role = document.getElementById('role').value;
+        var newFields = document.getElementById('fields');
+        if (role === 'Patient') {
+            newFields.style.display = 'block';
+        } else {
+            newFields.style.display = 'none';
+        }
+    }
+</script>
+
+@endsection

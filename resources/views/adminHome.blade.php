@@ -1,9 +1,17 @@
 <style>
-
+.container1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
 .container.admin-dashboard {
     border-left: 5px solid #4db8ff;
     background-color: #eef7fc;
+    width:100%;
 }
+
 
 .container.admin-dashboard h1 {
     color: #4db8ff;
@@ -16,6 +24,7 @@
 <br><br><br>
 
 @section('content') 
+<div class="container1">
     <div class="container admin-dashboard">
         <h1>Welcome, Admin!</h1>
         <p>This is the Admin Dashboard.</p>
@@ -31,6 +40,7 @@
                 {{ session('error') }}
             </div>
         @endif
+    </div>
     </div>
 @endsection
 

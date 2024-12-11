@@ -41,13 +41,15 @@ table tbody td {
     font-size: 14px;
     color: black;
 }
+table tbody {
+    background-color: white;}
 
 table tbody tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
 table tbody tr:hover {
-    background-color: #f1f1f1;
+    background-color: lightgrey;
 }
 
 textarea,
@@ -135,35 +137,37 @@ form {
 <br><br><br>
 
 @section('content')
-    <br><br><br><br>
-    <h1>Pending Accounts</h1>
-    <table> 
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($pendingUsers as $user)
+<br><br><br>
+    <div class="container">
+        <h1>Pending Accounts</h1>
+        <table> 
+            <thead>
                 <tr>
-                    <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td>{{ $user->role }}</td>
-                    <td>
-                        <form method="POST" action="{{ route('admin.approve', $user->id) }}">
-                            @csrf
-                            <button class="btn approve" type="submit">Approve</button>
-                        </form>
-                        <form method="POST" action="{{ route('admin.deny', $user->id) }}">
-                            @csrf
-                            <button class="btn deny" type="submit">Deny</button>
-                        </form>
-                    </td>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach($pendingUsers as $user)
+                    <tr>
+                        <td>{{ $user->first_name }} {{ $user->last_name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->role }}</td>
+                        <td>
+                            <form method="POST" action="{{ route('admin.approve', $user->id) }}">
+                                @csrf
+                                <button class="btn approve" type="submit">Approve</button>
+                            </form>
+                            <form method="POST" action="{{ route('admin.deny', $user->id) }}">
+                                @csrf
+                                <button class="btn deny" type="submit">Deny</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection

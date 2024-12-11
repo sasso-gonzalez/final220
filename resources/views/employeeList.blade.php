@@ -152,7 +152,9 @@ form div input[type="number"] {
 @extends('layouts.app')
 @include('layouts.navigation')
 <br><br><br>
+
 @section('content')
+<br><br><br>
     <div class="container">
         <h1>Employee List</h1>
         <form class="employeelist" method="GET" action="{{ route('employeeList') }}">

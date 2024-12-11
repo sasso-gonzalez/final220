@@ -97,9 +97,10 @@ form button:disabled {
 </style>
 @extends('layouts.app')
 @include('layouts.navigation')
-
 <br><br><br>
+
 @section('content')
+<br><br><br>
 <div class="container">
     <h1>Admin Payment Page</h1>
     <form action="{{ route('admin.payment.submit') }}" method="POST">

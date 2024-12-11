@@ -23,16 +23,11 @@ class CaregiverHomeController extends Controller
     public function showCaregiverHome($id)
     {
         $caregiverEmpId = Auth::user()->employee->emp_id;
-        $shiftDate = Carbon::now()->format('Y-m-d'); // getting today's date
+        $currentDate = now()->toDateString();
         $caregroup = Shift::where('emp_ID', $caregiverEmpId)
-                          ->whereDate('shift_date', $shiftDate) // ensuring its getting the caregroup assigned for today
+                          ->whereDate('shift_date', $currentDate)
                           ->value('caregroup');
-        
-        $patients = Patient::where('caregroup', $caregroup)
-                           ->with(['patientSchedules' => function($query) use ($shiftDate) {
-                               $query->whereDate('particular_date', $shiftDate);
-                           }])->get();
-    
+        $patients = Patient::where('caregroup', $caregroup)->get();
         return view('caregiverHome', compact('patients'));
     }
     

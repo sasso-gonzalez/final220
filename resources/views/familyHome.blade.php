@@ -1,6 +1,6 @@
 <style>
     .container {
-        max-width: 900px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 20px;
         background-color: #fff;
@@ -9,6 +9,7 @@
     }
     #familyForm {
         background-color: #f9f9f9;
+        color:black;
         padding: 20px;
         border: 1px solid #ddd;
         border-radius: 5px;
@@ -59,12 +60,12 @@
     }
 
     .ok {
-        background-color: #4CAF50;
+        background-color: #007bff;
         color: white;
     }
 
     .ok:hover {
-        background-color: #45a049;
+        background-color: #0056b3;
     }
 
     .cancel {
@@ -93,6 +94,7 @@
     }
 
     .table-container {
+        color:black;
         background-color: #fff;
         padding: 20px;
         border: 1px solid #ddd;
@@ -120,8 +122,14 @@
     }
 
     .table th {
-        background-color: #f2f2f2;
+        background-color: #0056b3;
         font-weight: bold;
+    }
+    .table td {
+        color:black;
+    }
+    .table td:hover{
+        background-color:lightblue;
     }
 
     .patient-info {
@@ -141,12 +149,18 @@
     .return-link a:hover {
         text-decoration: underline;
     }
+    input[type='checkbox']{
+    height: 20px;
+    width: 20px;
+    border-radius: 4px black;
+    }
+
 </style>
 @extends('layouts.app')
 @include('layouts.navigation')
+<br><br><br>
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('css/familyHome.css') }}">
 <br><br><br>
 
 <div class="container">

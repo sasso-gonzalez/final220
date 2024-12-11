@@ -139,6 +139,7 @@ input[type="checkbox"] {
 <br><br><br>
 
 @section('content')
+<br><br><br>
     <div class="container">
         <h1>Daily Report</h1>
 

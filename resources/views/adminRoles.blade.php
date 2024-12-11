@@ -1,5 +1,4 @@
 <style>
-
 .container {
     max-width: 1000px;
     margin: 0 auto;
@@ -53,9 +52,9 @@ table tbody tr:hover {
     background-color: lightgrey;
 }
 
-form {
+/* form {
     margin-top: 20px;
-}
+} */
 
 .mb-3 {
     margin-bottom: 15px;
@@ -147,6 +146,7 @@ table td {
 <br><br><br>
 
 @section('content')
+<br><br><br>
 <div class="container">
     <h1>Role Management</h1>
     <p>This page is accessed by Admin only.</p>

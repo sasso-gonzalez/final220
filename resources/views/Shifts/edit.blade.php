@@ -1,135 +1,128 @@
 <style>
-    /* public/css/edit_shift.css */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7fafc;
+        margin: 0;
+        padding: 0;
+    }
 
-/* General Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f7fafc;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 30px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    font-size: 2em;
-    color: #333;
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-/* Form Styles */
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-input[type="date"],
-input[type="datetime-local"],
-select {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-input[type="date"]:focus,
-input[type="datetime-local"]:focus,
-select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* Caregroup Styles */
-#caregroup-div {
-    margin-bottom: 20px;
-    display: none;
-}
-
-#caregroup-div label {
-    font-size: 14px;
-    color: #333;
-}
-
-select {
-    background-color: #f9f9f9;
-}
-
-select option {
-    font-size: 14px;
-}
-
-/* Button Styles */
-button[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-}
-
-button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-/* Error Message Styles */
-.alert {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.alert ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.alert li {
-    margin-bottom: 5px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
     .container {
-        padding: 20px;
-        width: 90%;
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
-        font-size: 1.5em;
+        font-size: 2em;
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
     }
 
     input[type="date"],
     input[type="datetime-local"],
     select {
-        font-size: 12px;
-        padding: 8px;
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    input[type="date"]:focus,
+    input[type="datetime-local"]:focus,
+    select:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    #caregroup-div {
+        margin-bottom: 20px;
+        display: none;
+    }
+
+    #caregroup-div label {
+        font-size: 14px;
+        color: #333;
+    }
+
+    select {
+        background-color: #f9f9f9;
+    }
+
+    select option {
+        font-size: 14px;
     }
 
     button[type="submit"] {
-        font-size: 14px;
-        padding: 10px 18px;
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: none;
     }
-}
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .alert {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .alert ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .alert li {
+        margin-bottom: 5px;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 20px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 1.5em;
+        }
+
+        input[type="date"],
+        input[type="datetime-local"],
+        select {
+            font-size: 12px;
+            padding: 8px;
+        }
+
+        button[type="submit"] {
+            font-size: 14px;
+            padding: 10px 18px;
+        }
+    }
 </style>
 @extends('layouts.app')
 @include('layouts.navigation')
 <br><br><br>
 
 @section('content')
+<br><br><br>
 <div class="container">
     <h1>Edit Shift</h1>
     <form action="{{ route('shifts.update', $shift->id) }}" method="POST">
@@ -161,27 +154,29 @@ button[type="submit"]:hover {
 </div>
 
 <script>
-function updateRole() {
-    const selectedOption = document.querySelector('#emp_id option:checked');
-    const role = selectedOption.getAttribute('data-role');
-    document.getElementById('role').value = role;
+    function updateRole() {
+        const selectedOption = document.querySelector('#emp_id option:checked');
+        const role = selectedOption.getAttribute('data-role');
+        document.getElementById('role').value = role;
 
-    const caregroupDiv = document.getElementById('caregroup-div');
-    const caregroupInput = document.getElementById('caregroup');
+        // Show or hide caregiver group dropdown based on role
+        const caregroupDiv = document.getElementById('caregroup-div');
+        const caregroupInput = document.getElementById('caregroup');
 
-    if (role === 'Caregiver') {
-        caregroupDiv.style.display = 'block';
-        caregroupInput.required = true;
-    } else {
-        caregroupDiv.style.display = 'none';
-        caregroupInput.value = '';
-        caregroupInput.required = false;
+        if (role === 'Caregiver') {
+            caregroupDiv.style.display = 'block';
+            caregroupInput.setAttribute('required', 'required');
+        } else {
+            caregroupDiv.style.display = 'none';
+            caregroupInput.removeAttribute('required');
+            caregroupInput.value = '';
+        }
     }
-}
 
-document.addEventListener('DOMContentLoaded', function() {
-    updateRole();
-});
+    // Initialize the form based on the selected employee
+    document.addEventListener('DOMContentLoaded', function() {
+        updateRole();
+    });
 </script>
 
 @if ($errors->any())

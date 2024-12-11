@@ -1,145 +1,139 @@
 <style>
-    /* public/css/roster.css */
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f7fafc;
+        margin: 0;
+        padding: 0;
+    }
 
-/* General Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f7fafc;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 100px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    font-size: 2em;
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin: 10px;
-}
-
-.btn-primary {
-    background-color: #007bff;
-}
-
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268;
-}
-
-button[type="submit"] {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button[type="submit"]:hover {
-    background-color: #218838;
-}
-
-/* Form Styles */
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    font-size: 14px;
-    color: #333;
-}
-
-input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-input[type="date"]:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-/* Table Styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-table th,
-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-table th {
-    background-color: #f1f1f1;
-    font-size: 14px;
-    color: #333;
-}
-
-table td {
-    font-size: 14px;
-    color: #555;
-}
-
-/* Hover Effect on Table Rows */
-table tbody tr:hover {
-    background-color: #f9f9f9;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
     .container {
-        padding: 15px;
-        width: 90%;
+        max-width: 1200px;
+        margin: 100px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
-        font-size: 1.5em;
+        font-size: 2em;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
     }
 
     .btn {
-        font-size: 12px;
-        padding: 8px 15px;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        text-decoration: none;
+        margin: 10px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+    }
+
+    button[type="submit"] {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #218838;
+    }
+
+    /* Form Styles */
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-size: 14px;
+        color: #333;
+    }
+
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    input[type="date"]:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    /* Table Styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
     }
 
     table th,
     table td {
-        font-size: 12px;
-        padding: 10px;
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
     }
-}
 
+    table th {
+        background-color: #f1f1f1;
+        font-size: 14px;
+        color: #333;
+    }
+
+    table td {
+        font-size: 14px;
+        color: #555;
+    }
+
+    table tbody tr:hover {
+        background-color: #f9f9f9;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 15px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 1.5em;
+        }
+
+        .btn {
+            font-size: 12px;
+            padding: 8px 15px;
+        }
+
+        table th,
+        table td {
+            font-size: 12px;
+            padding: 10px;
+        }
+    }
 </style>
 
 @extends('layouts.app')
@@ -147,7 +141,7 @@ table tbody tr:hover {
 <br><br><br>
 
 @section('content')
-
+<br><br><br>
     <div class="container">
         <h1>Roster</h1>
         @if(auth()->user()->hasRole(['admin', 'Supervisor']))

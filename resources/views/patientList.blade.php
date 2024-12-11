@@ -1,7 +1,7 @@
 <style>
 
 .container {
-    max-width: 1000px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -147,8 +147,8 @@ table tbody td a:hover {
 <br><br><br>
 <link href="{{ asset('../CSS/customerHomes.css') }}" rel="stylesheet">
 
-
 @section('content')
+<br><br><br>
     <div class="container">
         <h1>Patient List</h1>
         <form class="patientlist" method="GET" action="{{ route('patientList') }}">

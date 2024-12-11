@@ -1,34 +1,16 @@
-<style>
-.container.caregiver-dashboard {
-    border-left: 5px solid #ffb84d;
-    background-color: #fff8e6;
-}
-
-.container.caregiver-dashboard h1 {
-    color: #ffb84d;
-}
-
-.container.caregiver-dashboard .table th {
-    background-color: #ffe4cc;
-    color: #333;
-}
-
-.container.caregiver-dashboard .btn-primary {
-    background-color: #ffb84d;
-}
-
-.container.caregiver-dashboard .btn-primary:hover {
-    background-color: #d4913a;
-}
-
-</style>
 @extends('layouts.app')
 @include('layouts.navigation')
 <link rel="stylesheet" href="{{ asset('CSS/employeesHomes.css') }}">
-<br>
+<br><br><br>
+
 @section('content')
+<br><br><br>
     <div class="container caregiver-dashboard">
         <h1>Caregiver Home</h1>
+
+        @if(session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
 
         <table class="table table-bordered">
             <thead>

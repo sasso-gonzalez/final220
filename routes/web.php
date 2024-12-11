@@ -100,6 +100,7 @@
 
         //shifts
         Route::get('/shifts/create', [ShiftController::class, 'create'])->name('shifts.create');
+        Route::get('/shifts/available-employees', [ShiftController::class, 'getAvailableEmployees']);
         Route::get('/shifts', [ShiftController::class, 'index'])->name('shifts.index');//probably dont need this here -serena
         Route::post('/shifts', [ShiftController::class, 'store'])->name('shifts.store');
         Route::get('/shifts/{id}/edit', [ShiftController::class, 'edit'])->name('shifts.edit');
@@ -107,7 +108,6 @@
         
         //List of Patient/addditionalifo and employees/salary. Accessible to both admin/supervisor (supervisor cant change salary however) -serena
         Route::get('/employeelist', [AdminAccountController::class, 'adminEmployeeList'])->name('employeeList');
-
         Route::get('/additionalInfo/{id}', [PatientController::class, 'patientDetails'])->name('additionalInfo');
         Route::post('/additionalInfo/{id}', [PatientController::class, 'updatingDetails'])->name('updatingDetails');
 

@@ -1,26 +1,31 @@
-/* palette:
-lightblue: #ddeff3
-darkblue: #224356
-grey: #8da6ad
-grey-blue: #b9cfd6 */
-
-
-*{
+* {
     box-sizing: border-box;
 }
-html, body{
+
+html, body {
     margin: 0;
     padding: 0;
     background-color: #dafaff;
     font-family: figtree;
     color: white;
+    height: 100%;
 }
 
-body{
-    /* height: 100vh; */
+body {
     width: 100vw;
 }
-.navbar{
+
+.min-h-screen {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.flex-grow {
+    flex: 1;
+}
+
+.navbar {
     background-color: #0d2a4a;
     position: fixed;
     top: 0;
@@ -28,19 +33,20 @@ body{
     padding: 20px;
     text-align: right;
 }
-.navbar_items a{
+
+.navbar_items a {
     width: fit-content;
     text-decoration: none;
 }
-.word{
+
+.word {
     padding-left: 5vw;
 }
-.word:hover{
-    /* padding-left: 5vw; */
+
+.word:hover {
     background-color: #6f8085;
 }
 
-#fields{
+#fields {
     display: none;
 }
-
